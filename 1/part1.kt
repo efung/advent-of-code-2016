@@ -16,7 +16,7 @@ private fun move(curDir: Direction, move: String?): Direction {
     return curDir
 }
 
-fun main(args: Array<String>) {
+fun part1main(args: Array<String>) {
     val turnRe: Regex = "(L|R)(\\d+)".toRegex()
     var X: Long = 0
     var Y: Long = 0
@@ -30,14 +30,14 @@ fun main(args: Array<String>) {
         val distance: Int? = matches?.get(2)?.value?.toInt()
         
         curDir = move(curDir, turn)
-        when {
-            curDir == Direction.NORTH -> Y += distance!!
-            curDir == Direction.SOUTH -> Y -= distance!!
-            curDir == Direction.WEST -> X -= distance!!
-            curDir == Direction.EAST -> X += distance!!
+        when (curDir) {
+            Direction.NORTH -> Y += distance!!
+            Direction.SOUTH -> Y -= distance!!
+            Direction.WEST -> X -= distance!!
+            Direction.EAST -> X += distance!!
         }
-    }
+	}
     
     val taxicabDistance: Long = Math.abs(X) + Math.abs(Y)
-    print("We're now at ($X, $Y) == $taxicabDistance blocks away")
+    println("We're now at ($X, $Y) == $taxicabDistance blocks away")
 }

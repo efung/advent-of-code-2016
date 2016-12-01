@@ -12,7 +12,7 @@ private fun move(curDir: Direction, move: String?): Direction {
     return curDir
 }
 
-fun main(args: Array<String>) {
+fun part2main(args: Array<String>) {
     val turnRe: Regex = "(L|R)(\\d+)".toRegex()
     var X: Long = 0
     var Y: Long = 0
@@ -28,11 +28,11 @@ fun main(args: Array<String>) {
         
         curDir = move(curDir, turn)
         for (i in 1..distance!!) {
-            when {
-                curDir == Direction.NORTH -> Y += 1
-                curDir == Direction.SOUTH -> Y -= 1
-                curDir == Direction.WEST -> X -= 1
-                curDir == Direction.EAST -> X += 1
+ 			when (curDir) {
+                Direction.NORTH -> Y += 1
+                Direction.SOUTH -> Y -= 1
+                Direction.WEST -> X -= 1
+                Direction.EAST -> X += 1
             }
             val newPos: String = "$X,$Y"
             if (breadcrumbs.get(newPos) != null) {
@@ -40,8 +40,13 @@ fun main(args: Array<String>) {
             }
             breadcrumbs.put(newPos, 1)
         }
-    }
+	}
     
     val taxicabDistance: Long = Math.abs(X) + Math.abs(Y)
-    print("We revisited ($X, $Y) == $taxicabDistance blocks away")
+    println("We revisited ($X, $Y) == $taxicabDistance blocks away")
+}
+
+fun main(args: Array<String>) {
+    part1(args)
+    part2(args)
 }
